@@ -17,7 +17,7 @@ class HeaderWidget extends StatelessWidget {
                 radius: 25,
               ),
               SizedBox(width: 80),
-              Icon(Icons.location_on_outlined),
+              Icon(Icons.location_on_outlined, size: 12),
               Text("CSN, India"),
               Spacer(),
               Icon(Icons.sort)

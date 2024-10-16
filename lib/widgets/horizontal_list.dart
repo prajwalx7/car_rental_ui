@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HorizontalList extends StatefulWidget {
-  const HorizontalList({super.key});
+  final Function(String) onBrandSelected;
+
+  const HorizontalList({super.key, required this.onBrandSelected});
 
   @override
   State<HorizontalList> createState() => _HorizontalListState();
@@ -11,14 +13,14 @@ class _HorizontalListState extends State<HorizontalList> {
   final List<String> carBrands = [
     'All',
     'BMW',
+    'Lamborghini',
     'Audi',
     'Ferrari',
-    'Bugatti',
-    'Tesla',
     'Honda',
-    'McLaren',
     'Porsche',
-    'Koenigsegg',
+    'Ford',
+    'Mercedes',
+    'Chervolet'
   ];
   int selectedIndex = 0;
 
@@ -55,6 +57,7 @@ class _HorizontalListState extends State<HorizontalList> {
       onSelected: (bool selected) {
         setState(() {
           selectedIndex = index;
+          widget.onBrandSelected(brand);
         });
       },
     );
