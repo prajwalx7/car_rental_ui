@@ -1,25 +1,32 @@
 import 'package:car_rental_ui/model/car_model.dart';
 import 'package:car_rental_ui/widgets/car_container.dart';
+import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 
 class CarContainerList extends StatefulWidget {
-  final String selectedBrand; 
+  final String selectedBrand;
 
-  const CarContainerList({super.key, required this.selectedBrand}); 
+  const CarContainerList({super.key, required this.selectedBrand});
 
   @override
   State<CarContainerList> createState() => _CarContainerListState();
 }
 
 class _CarContainerListState extends State<CarContainerList> {
+  final ScrollController _scrollController = ScrollController();
   @override
-  Widget build(BuildContext context) {  
+  Widget build(BuildContext context) {
     List<CarModel> filteredCars = widget.selectedBrand == 'All'
         ? cars
         : cars.where((car) => car.brand == widget.selectedBrand).toList();
 
     return Expanded(
-      child: ListView.builder(
+      child: FadingEdgeScrollView.fromScrollView(
+        gradientFractionOnStart: 0.1,
+        gradientFractionOnEnd: 0.5,
+        child: ListView.builder(
+          controller: _scrollController,
+          padding: EdgeInsets.only(bottom: 100),
           itemCount: filteredCars.length,
           itemBuilder: (context, index) {
             final car = filteredCars[index];
@@ -27,7 +34,9 @@ class _CarContainerListState extends State<CarContainerList> {
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: CarContainer(car: car),
             );
-          }),
+          },
+        ),
+      ),
     );
   }
 }
