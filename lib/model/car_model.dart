@@ -79,7 +79,7 @@ List<CarModel> cars = [
     rate: '3000',
   ),
   CarModel(
-    brand: 'Chervolet',
+    brand: 'Chevrolet',
     model: 'Corvette Z06',
     modelUrl: 'assets/cars/z06.png',
     rating: '4.6',
@@ -93,7 +93,7 @@ List<CarModel> cars = [
     rate: '2000',
   ),
   CarModel(
-    brand: 'Chervolet',
+    brand: 'Chevrolet',
     model: 'Corvette',
     modelUrl: 'assets/cars/corvette.png',
     rating: '4.8',

@@ -14,11 +14,22 @@ class CarContainerList extends StatefulWidget {
 
 class _CarContainerListState extends State<CarContainerList> {
   final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<CarModel> filteredCars = widget.selectedBrand == 'All'
         ? cars
-        : cars.where((car) => car.brand == widget.selectedBrand).toList();
+        : cars
+            .where((car) =>
+                car.brand.trim().toLowerCase() ==
+                widget.selectedBrand.trim().toLowerCase())
+            .toList();
 
     return Expanded(
       child: FadingEdgeScrollView.fromScrollView(
@@ -26,7 +37,7 @@ class _CarContainerListState extends State<CarContainerList> {
         gradientFractionOnEnd: 0.5,
         child: ListView.builder(
           controller: _scrollController,
-          padding: EdgeInsets.only(bottom: 100),
+          padding: const EdgeInsets.only(bottom: 100),
           itemCount: filteredCars.length,
           itemBuilder: (context, index) {
             final car = filteredCars[index];

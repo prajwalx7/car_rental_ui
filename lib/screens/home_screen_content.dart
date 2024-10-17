@@ -4,7 +4,14 @@ import 'package:car_rental_ui/widgets/horizontal_list.dart';
 import 'package:flutter/material.dart';
 
 class HomeContent extends StatelessWidget {
-  const HomeContent({super.key});
+  final String selectedBrand;
+  final ValueChanged<String> onBrandSelected;
+
+  const HomeContent({
+    super.key,
+    required this.selectedBrand,
+    required this.onBrandSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +21,10 @@ class HomeContent extends StatelessWidget {
         const HeaderWidget(),
         const SizedBox(height: 8),
         HorizontalList(
-          onBrandSelected: (brand) {
-            (context as Element).markNeedsBuild();
-          },
+          onBrandSelected: onBrandSelected,
         ),
         const SizedBox(height: 20),
-        const CarContainerList(selectedBrand: 'All'),
+        CarContainerList(selectedBrand: selectedBrand),
       ],
     );
   }

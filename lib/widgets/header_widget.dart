@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
@@ -17,7 +18,8 @@ class HeaderWidget extends StatelessWidget {
                 radius: 25,
               ),
               SizedBox(width: 80),
-              Icon(Icons.location_on_outlined, size: 12),
+              Icon(Iconsax.location, size: 12),
+              SizedBox(width: 3),
               Text("CSN, India"),
               Spacer(),
               Icon(Icons.sort)

@@ -1,4 +1,5 @@
 import 'package:car_rental_ui/model/car_model.dart';
+import 'package:car_rental_ui/screens/home_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class CarContainer extends StatelessWidget {
@@ -84,7 +85,12 @@ class CarContainer extends StatelessWidget {
             bottom: 10,
             right: 10,
             child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HomeDetailScreen(car: car)));
+              },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(42)),
               backgroundColor: const Color(0xffCFFA49),

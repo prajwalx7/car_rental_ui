@@ -13,25 +13,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String selectedBrand = 'All';
+  String selectedBrand = 'All'; 
   int currentPage = 0;
   final PageController _pageController = PageController();
-  final List<Widget> pages = [
-    const HomeContent(),
-    const ExoticCars(),
-    const SchedulesScreen(),
-    const Profile(),
-  ];
-
-  void _onNavBarTap(int index) {
-    if (index != currentPage) {
-      _pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +31,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   currentPage = index;
                 });
               },
-              children: pages,
+              children: [
+                
+                HomeContent(
+                  selectedBrand: selectedBrand,
+                  onBrandSelected: (String brand) {
+                    setState(() {
+                      selectedBrand = brand; 
+                    });
+                  },
+                ),
+                const ExoticCars(),
+                const SchedulesScreen(),
+                const Profile(),
+              ],
             ),
             Positioned(
               bottom: 0,
@@ -55,7 +52,13 @@ class _HomeScreenState extends State<HomeScreen> {
               right: 0,
               child: CustomBottomNavBar(
                 currentIndex: currentPage,
-                onTap: _onNavBarTap,
+                onTap: (int index) {
+                  _pageController.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                },
               ),
             ),
           ],

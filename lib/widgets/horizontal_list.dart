@@ -20,7 +20,7 @@ class _HorizontalListState extends State<HorizontalList> {
     'Porsche',
     'Ford',
     'Mercedes',
-    'Chervolet'
+    'Chevrolet'
   ];
   int selectedIndex = 0;
 
@@ -56,8 +56,8 @@ class _HorizontalListState extends State<HorizontalList> {
       selected: selectedIndex == index,
       onSelected: (bool selected) {
         setState(() {
-          selectedIndex = index;
-          widget.onBrandSelected(brand);
+          selectedIndex = index; // Update the selected chip
+          widget.onBrandSelected(brand); // Notify parent of brand selection
         });
       },
     );
