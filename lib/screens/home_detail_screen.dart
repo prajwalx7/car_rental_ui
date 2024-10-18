@@ -30,7 +30,7 @@ class _HomeDetailScreenState extends State<HomeDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   buildSpecifications(
-                      'assets/svg/speed.svg', "Max Speed", "450 Km/h"),
+                      'assets/svg/speed.svg', "Max Speed", "450 Km/h", context),
                   Container(
                     height: 80,
                     width: 1,
@@ -47,7 +47,7 @@ class _HomeDetailScreenState extends State<HomeDetailScreen> {
                     ),
                   ),
                   buildSpecifications(
-                      'assets/svg/engine.svg', "Engine", "V8 Turbo"),
+                      'assets/svg/engine.svg', "Engine", "V8 Turbo", context),
                   Container(
                     height: 80,
                     width: 1,
@@ -62,7 +62,8 @@ class _HomeDetailScreenState extends State<HomeDetailScreen> {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter)),
                   ),
-                  buildSpecifications('assets/svg/seats.svg', "Seats", "2"),
+                  buildSpecifications(
+                      'assets/svg/seats.svg', "Seats", "2", context),
                 ],
               ),
               const SizedBox(height: 10),
@@ -79,19 +80,38 @@ class _HomeDetailScreenState extends State<HomeDetailScreen> {
                         children: [
                           Text(
                             'Rent Price',
-                            style: TextStyle(fontSize: 18),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(
+                                    fontFamily: 'Prompt',
+                                    fontSize: 18,
+                                    color: Colors.white),
                           ),
                           Spacer(),
                           Text.rich(
                             TextSpan(
                               children: [
                                 TextSpan(
-                                    text: '₹ ${widget.car.rate}',
-                                    style: TextStyle(fontSize: 26)),
+                                  text: '₹ ${widget.car.rate}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          fontFamily: 'Prompt',
+                                          fontSize: 26,
+                                          color: Colors.white),
+                                ),
                                 TextSpan(
-                                    text: " /1 Day",
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.grey))
+                                  text: " /1 Day",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          fontFamily: 'Prompt',
+                                          fontSize: 18,
+                                          color: Colors.white60),
+                                )
                               ],
                             ),
                           ),
@@ -113,10 +133,16 @@ class _HomeDetailScreenState extends State<HomeDetailScreen> {
                             decoration: BoxDecoration(
                                 color: const Color(0xffCFFA49),
                                 borderRadius: BorderRadius.circular(8)),
-                            child: const Text(
+                            child: Text(
                               "Book now",
-                              style:
-                                  TextStyle(fontSize: 22, color: Colors.black),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(
+                                      fontFamily: 'Prompt',
+                                      fontSize: 22,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
                             ),
                           )
                         ],
@@ -133,7 +159,8 @@ class _HomeDetailScreenState extends State<HomeDetailScreen> {
   }
 }
 
-Widget buildSpecifications(String svgPath, String text, String speed) {
+Widget buildSpecifications(
+    String svgPath, String text, String speed, BuildContext context) {
   return Column(
     children: [
       SvgPicture.asset(
@@ -145,12 +172,14 @@ Widget buildSpecifications(String svgPath, String text, String speed) {
       const SizedBox(height: 5),
       Text(
         text,
-        style: const TextStyle(fontSize: 12, color: Colors.grey),
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            fontFamily: 'Prompt', fontSize: 16, color: Colors.white70),
       ),
       const SizedBox(height: 8),
       Text(
         speed,
-        style: const TextStyle(fontSize: 16, color: Colors.white),
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            fontFamily: 'Orbitron', fontSize: 14, color: Colors.white),
       ),
     ],
   );

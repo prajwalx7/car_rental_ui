@@ -28,17 +28,17 @@ class CarContainer extends StatelessWidget {
                   Text(
                     car.brand,
                     style: const TextStyle(
-                      fontSize: 30,
-                      color: Color(0xffCFFA49),
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontFamily: 'Orbitron',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 28,
+                        color: Color(0xffCFFA49)),
                   ),
                   Text(
                     car.model,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.white70,
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        fontFamily: 'Prompt',
+                        fontSize: 16,
+                        color: Colors.white70),
                   ),
                 ],
               ),
@@ -65,10 +65,10 @@ class CarContainer extends StatelessWidget {
                   painter: RoundedCornerTrianglePainter(),
                   child: SizedBox(
                     height: 50,
-                    width: 80,
+                    width: 70,
                     child: Center(
                       child: Transform.translate(
-                        offset: const Offset(20, 8),
+                        offset: const Offset(15, 8),
                         child: Transform.rotate(
                           angle: 0.2,
                           child: Image.asset(
@@ -94,16 +94,16 @@ class RoundedCornerTrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Color(0xffCFFA49)
+      ..color = const Color(0xffCFFA49)
       ..style = PaintingStyle.fill;
 
-    final radius = 12.0; // Match this with the container's border radius
+    const radius = 12.0;
     final path = Path()
       ..moveTo(0, size.height)
       ..lineTo(size.width - radius, size.height)
       ..arcToPoint(
         Offset(size.width, size.height - radius),
-        radius: Radius.circular(radius),
+        radius: const Radius.circular(radius),
         clockwise: false,
       )
       ..lineTo(size.width, 0)

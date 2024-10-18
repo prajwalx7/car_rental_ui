@@ -45,7 +45,9 @@ class _HorizontalListState extends State<HorizontalList> {
       backgroundColor: const Color(0xff212024),
       label: Text(
         brand,
-        style: TextStyle(
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            fontFamily: 'Prompt',
+            fontSize: 14,
             color: selectedIndex == index ? Colors.black : Colors.white),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(42)),

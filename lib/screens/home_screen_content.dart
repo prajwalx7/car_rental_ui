@@ -19,11 +19,11 @@ class HomeContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const HeaderWidget(),
-        const SizedBox(height: 5),
+        const SizedBox(height: 10),
         HorizontalList(
           onBrandSelected: onBrandSelected,
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 8),
         CarContainerList(selectedBrand: selectedBrand),
       ],
     );

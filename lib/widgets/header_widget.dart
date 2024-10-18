@@ -6,7 +6,7 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
@@ -20,7 +20,11 @@ class HeaderWidget extends StatelessWidget {
               SizedBox(width: 80),
               Icon(Iconsax.location, size: 12),
               SizedBox(width: 3),
-              Text("CSN, India"),
+              Text(
+                "CSN, India",
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontFamily: 'Prompt', fontSize: 12, color: Colors.white),
+              ),
               Spacer(),
               Icon(Icons.sort)
             ],
@@ -31,21 +35,26 @@ class HeaderWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 14.0),
           child: Row(
             children: [
-              Text("Hello, ",
-                  style: TextStyle(color: Colors.white38, fontSize: 38)),
+              Text(
+                "Hello, ",
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontFamily: 'Prompt', fontSize: 32, color: Colors.white70),
+              ),
               Text(
                 "Prajwal",
-                style: TextStyle(fontSize: 38),
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontFamily: 'Prompt', fontSize: 32, color: Colors.white),
               ),
             ],
           ),
         ),
-        SizedBox(height: 4),
+        SizedBox(height: 8),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 14.0),
           child: Text(
             "Choose your ideal car",
-            style: TextStyle(color: Colors.white54, fontSize: 18),
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                fontFamily: 'Prompt', fontSize: 18, color: Colors.white70),
           ),
         ),
       ],

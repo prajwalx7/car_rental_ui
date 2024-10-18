@@ -19,29 +19,42 @@ class Middle extends StatelessWidget {
                 children: [
                   Text(
                     car.brand,
-                    textScaler: TextScaler.linear(1.0),
-                    style: TextStyle(
-                        fontSize: 38,
-                        color: const Color(0xffCFFA49),
-                        letterSpacing: 3.0),
+                    textScaler: const TextScaler.linear(1.0),
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          fontFamily: 'Orbitron',
+                          fontSize: 36,
+                          color: const Color(0xffCFFA49),
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 3.0,
+                        ),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 4.0),
                     child: Text(
                       car.model,
-                      style: TextStyle(color: Colors.white70, fontSize: 22),
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          fontFamily: 'Prompt',
+                          fontSize: 22,
+                          color: Colors.white70),
                     ),
                   ),
-                  SizedBox(height: 2),
+                  SizedBox(height: 3),
                   Row(
                     children: [
                       Icon(
                         Icons.star_rate_rounded,
                         color: Colors.amber,
+                        size: 20,
                       ),
                       SizedBox(width: 5),
-                      Text(car.rating),
+                      Text(
+                        car.rating,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              fontFamily: 'Prompt',
+                              fontSize: 20,
+                            ),
+                      ),
                     ],
                   ),
                 ],
