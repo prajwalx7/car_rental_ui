@@ -42,7 +42,7 @@ class _CarContainerListState extends State<CarContainerList> {
           itemBuilder: (context, index) {
             final car = filteredCars[index];
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 6.0),
               child: CarContainer(car: car),
             );
           },

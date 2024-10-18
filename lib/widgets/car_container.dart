@@ -10,99 +10,108 @@ class CarContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6.0),
-      child: Stack(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            height: 180,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: const Color(0xff212024),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                          size: 18,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          car.rating,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      ],
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Container(
+        height: 140,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: const Color(0xff212024),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 35),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    car.brand,
+                    style: const TextStyle(
+                      fontSize: 30,
+                      color: Color(0xffCFFA49),
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      car.brand,
-                      style: const TextStyle(
-                        fontSize: 26,
-                        color: Color(0xffCFFA49),
-                      ),
+                  ),
+                  Text(
+                    car.model,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white70,
                     ),
-                    Text(
-                      car.model,
-                      style:
-                          const TextStyle(fontSize: 18, color: Colors.white70),
-                    ),
-                    const SizedBox(height: 30),
-                    Text.rich(
-                      TextSpan(children: [
-                        TextSpan(
-                            text: '₹ ${car.rate}',
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                        const TextSpan(
-                            text: "  1 day rental",
-                            style: TextStyle(color: Colors.white70))
-                      ]),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Column(
-                  children: [
-                    Image.asset(
-                      car.modelUrl,
-                      height: 160,
-                      width: 180,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 10,
-            right: 10,
-            child: FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomeDetailScreen(car: car)));
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(42)),
-              backgroundColor: const Color(0xffCFFA49),
-              mini: true,
-              child: const Icon(
-                Icons.arrow_forward,
-                color: Colors.black,
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+            Positioned(
+              right: 0,
+              child: Image.asset(
+                car.modelUrl,
+                height: 140,
+                width: 180,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomeDetailScreen(car: car)));
+                },
+                child: CustomPaint(
+                  painter: RoundedCornerTrianglePainter(),
+                  child: SizedBox(
+                    height: 50,
+                    width: 80,
+                    child: Center(
+                      child: Transform.translate(
+                        offset: const Offset(20, 8),
+                        child: Transform.rotate(
+                          angle: 0.2,
+                          child: Image.asset(
+                            "assets/images/arrow.png",
+                            height: 25,
+                            width: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+}
+
+class RoundedCornerTrianglePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Color(0xffCFFA49)
+      ..style = PaintingStyle.fill;
+
+    final radius = 12.0; // Match this with the container's border radius
+    final path = Path()
+      ..moveTo(0, size.height)
+      ..lineTo(size.width - radius, size.height)
+      ..arcToPoint(
+        Offset(size.width, size.height - radius),
+        radius: Radius.circular(radius),
+        clockwise: false,
+      )
+      ..lineTo(size.width, 0)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

@@ -56,8 +56,8 @@ class _HorizontalListState extends State<HorizontalList> {
       selected: selectedIndex == index,
       onSelected: (bool selected) {
         setState(() {
-          selectedIndex = index; // Update the selected chip
-          widget.onBrandSelected(brand); // Notify parent of brand selection
+          selectedIndex = index;
+          widget.onBrandSelected(brand);
         });
       },
     );

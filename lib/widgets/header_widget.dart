@@ -10,7 +10,7 @@ class HeaderWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 5),
           child: Row(
             children: [
               CircleAvatar(
@@ -26,9 +26,9 @@ class HeaderWidget extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 15),
+        SizedBox(height: 12),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: 14.0),
           child: Row(
             children: [
               Text("Hello, ",
@@ -42,7 +42,7 @@ class HeaderWidget extends StatelessWidget {
         ),
         SizedBox(height: 4),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: 14.0),
           child: Text(
             "Choose your ideal car",
             style: TextStyle(color: Colors.white54, fontSize: 18),

@@ -2,6 +2,7 @@ import 'package:car_rental_ui/model/car_model.dart';
 import 'package:car_rental_ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class Header extends StatefulWidget {
   final CarModel car;
@@ -60,7 +61,19 @@ class _HeaderState extends State<Header> {
             ],
           ),
         ),
-        Image.asset(widget.car.modelUrl),
+        SizedBox(
+          height: 270,
+          child: ModelViewer(
+            src: widget.car.model3dUrl,
+            fieldOfView: "30deg",
+            cameraOrbit: "45deg 75deg 105%",
+            ar: true,
+            arScale: ArScale.fixed,
+            arPlacement: ArPlacement.floor,
+            arModes: const ['scene-viewer'],
+            loading: Loading.eager,
+          ),
+        ),
       ],
     );
   }
