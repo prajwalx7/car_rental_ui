@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String selectedBrand = 'All'; 
+  String selectedBrand = 'All';
   int currentPage = 0;
   final PageController _pageController = PageController();
 
@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Stack(
           children: [
             PageView(
+              physics: NeverScrollableScrollPhysics(),
               controller: _pageController,
               onPageChanged: (index) {
                 setState(() {
@@ -32,12 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               children: [
-                
                 HomeContent(
                   selectedBrand: selectedBrand,
                   onBrandSelected: (String brand) {
                     setState(() {
-                      selectedBrand = brand; 
+                      selectedBrand = brand;
                     });
                   },
                 ),

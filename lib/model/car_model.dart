@@ -5,6 +5,9 @@ class CarModel {
   final String model3dUrl;
   final String rating;
   final String rate;
+  final String speed;
+  final String engine;
+  final String seats;
 
   CarModel({
     required this.brand,
@@ -13,6 +16,9 @@ class CarModel {
     required this.model3dUrl,
     required this.rating,
     required this.rate,
+    required this.speed,
+    required this.engine,
+    required this.seats,
   });
 }
 
@@ -24,14 +30,20 @@ List<CarModel> cars = [
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.9',
     rate: '6000',
+    speed: '340 Km/h',
+    engine: '3.9L V8',
+    seats: '2',
   ),
   CarModel(
     brand: 'Ford',
-    model: 'Mustang',
+    model: 'Mustang GT',
     modelUrl: 'assets/cars/mustang.png',
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.7',
     rate: '3000',
+    speed: '250 Km/h',
+    engine: '5.0L V8',
+    seats: '2',
   ),
   CarModel(
     brand: 'Lamborghini',
@@ -40,6 +52,9 @@ List<CarModel> cars = [
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.8',
     rate: '6000',
+    speed: '325 Km/h',
+    engine: '5.2L V10',
+    seats: '2',
   ),
   CarModel(
     brand: 'Lamborghini',
@@ -48,14 +63,20 @@ List<CarModel> cars = [
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.7',
     rate: '5000',
+    speed: '305 Km/h',
+    engine: '4.0L V8',
+    seats: '4',
   ),
   CarModel(
     brand: 'BMW',
-    model: 'M4',
+    model: 'M4 Sports',
     modelUrl: 'assets/cars/M4.png',
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.9',
     rate: '3000',
+    speed: '290 Km/h',
+    engine: '3.0L Inline-6',
+    seats: '2',
   ),
   CarModel(
     brand: 'Lamborghini',
@@ -64,6 +85,9 @@ List<CarModel> cars = [
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.9',
     rate: '5000',
+    speed: '350 Km/h',
+    engine: '6.5L NA V12',
+    seats: '2',
   ),
   CarModel(
     brand: 'Mercedes',
@@ -72,6 +96,9 @@ List<CarModel> cars = [
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.7',
     rate: '2000',
+    speed: '290 Km/h',
+    engine: '4.0L V8',
+    seats: '4',
   ),
   CarModel(
     brand: 'Porsche',
@@ -80,6 +107,9 @@ List<CarModel> cars = [
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.8',
     rate: '4000',
+    speed: '293 Km/h',
+    engine: '3.0L Flat-6',
+    seats: '2',
   ),
   CarModel(
     brand: 'Audi',
@@ -88,6 +118,9 @@ List<CarModel> cars = [
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.7',
     rate: '3000',
+    speed: '280 Km/h',
+    engine: '2.9L V6',
+    seats: '4',
   ),
   CarModel(
     brand: 'Chevrolet',
@@ -96,21 +129,30 @@ List<CarModel> cars = [
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.6',
     rate: '2000',
+    speed: '315 Km/h',
+    engine: '5.5L NA V8',
+    seats: '2',
   ),
   CarModel(
     brand: 'Honda',
     model: 'Civic Type R',
     modelUrl: 'assets/cars/typeR.png',
-   model3dUrl: 'assets/3Dmodels/ferrari.glb',
+    model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.5',
     rate: '2000',
+    speed: '272 Km/h',
+    engine: '2.0L Inline-4',
+    seats: '4',
   ),
   CarModel(
     brand: 'Chevrolet',
-    model: 'Corvette',
+    model: 'Corvette Stingray',
     modelUrl: 'assets/cars/corvette.png',
     model3dUrl: 'assets/3Dmodels/ferrari.glb',
     rating: '4.8',
     rate: '4000',
+    speed: '312 Km/h',
+    engine: '6.2L NA V8',
+    seats: '2',
   ),
 ];

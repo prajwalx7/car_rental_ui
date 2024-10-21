@@ -29,8 +29,8 @@ class _HomeDetailScreenState extends State<HomeDetailScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buildSpecifications(
-                      'assets/svg/speed.svg', "Max Speed", "450 Km/h", context),
+                  buildSpecifications('assets/svg/speed.svg', "Max Speed",
+                      widget.car.speed, context),
                   Container(
                     height: 80,
                     width: 1,
@@ -46,24 +46,25 @@ class _HomeDetailScreenState extends State<HomeDetailScreen> {
                           end: Alignment.bottomCenter),
                     ),
                   ),
-                  buildSpecifications(
-                      'assets/svg/engine.svg', "Engine", "V8 Turbo", context),
+                  buildSpecifications('assets/svg/engine.svg', "Engine",
+                      widget.car.engine, context),
                   Container(
                     height: 80,
                     width: 1,
                     decoration: const BoxDecoration(
-                        color: Colors.white70,
-                        gradient: LinearGradient(
-                            colors: [
-                              Colors.transparent,
-                              Colors.white,
-                              Colors.transparent
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter)),
+                      color: Colors.white70,
+                      gradient: LinearGradient(
+                          colors: [
+                            Colors.transparent,
+                            Colors.white,
+                            Colors.transparent
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter),
+                    ),
                   ),
-                  buildSpecifications(
-                      'assets/svg/seats.svg', "Seats", "2", context),
+                  buildSpecifications('assets/svg/seats.svg', "Seats",
+                      widget.car.seats, context),
                 ],
               ),
               const SizedBox(height: 10),
