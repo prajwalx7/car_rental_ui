@@ -1,3 +1,4 @@
+import 'package:car_rental_ui/model/exotic_car_mode.dart';
 import 'package:car_rental_ui/screens/exotic_cars.dart';
 import 'package:car_rental_ui/screens/home_screen_content.dart';
 import 'package:car_rental_ui/screens/profile.dart';
@@ -41,7 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
                   },
                 ),
-                const ExoticCars(),
+                ExoticCars(
+                  car: exoticCars[currentPage],
+                ),
                 const SchedulesScreen(),
                 const Profile(),
               ],

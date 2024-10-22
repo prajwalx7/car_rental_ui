@@ -1,8 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:blur/blur.dart';
 import 'package:car_rental_ui/model/exotic_car_mode.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ExoticCars extends StatefulWidget {
-  const ExoticCars({super.key});
+  final ExoticCarModel car;
+  const ExoticCars({super.key, required this.car});
 
   @override
   State<ExoticCars> createState() => _ExoticCarsState();
@@ -11,7 +14,7 @@ class ExoticCars extends StatefulWidget {
 class _ExoticCarsState extends State<ExoticCars> {
   final PageController _pageController = PageController(
     viewportFraction: 0.9,
-    initialPage: 0,
+    initialPage: 1,
   );
 
   @override
@@ -23,105 +26,205 @@ class _ExoticCarsState extends State<ExoticCars> {
         centerTitle: true,
         backgroundColor: const Color(0xff06090D),
         elevation: 0,
-        surfaceTintColor: Colors.transparent,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xff000000), Color(0xff000000)],
-            stops: [0.5, 0.6],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 60),
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: exoticCars.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 100),
+        child: PageView.builder(
+          controller: _pageController,
+          itemCount: exoticCars.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(38),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.2),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.white.withOpacity(0.2),
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                      offset: const Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: Column(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(38)),
+                margin: const EdgeInsets.symmetric(vertical: 50),
+                child: Stack(
                   children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color.fromARGB(255, 206, 242, 97),
-                            Color.fromARGB(255, 68, 66, 66),
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                        ),
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(20)),
-                      ),
-                      child: Image.asset(
-                        exoticCars[index].imagePath,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      height: 176,
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:
-                            BorderRadius.vertical(bottom: Radius.circular(38)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            '${exoticCars[index].brand} ${exoticCars[index].model}',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(24),
+                            child: Image.asset(
+                              exoticCars[index].imagePath,
+                              fit: BoxFit.cover,
+                              height: 200,
+                              width: double.infinity,
+                            ).frosted(
+                                blur: 5,
+                                frostColor: Color.fromARGB(255, 213, 242, 124)),
                           ),
-                          Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 120, vertical: 20),
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.circular(58)),
-                                child: Text("Take a look"),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            buildSpecifications('assets/svg/speed.svg',
+                                "Max Speed", widget.car.maxspeed, context),
+                            Container(
+                              height: 80,
+                              width: 1,
+                              decoration: const BoxDecoration(
+                                color: Colors.white70,
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.transparent,
+                                      Colors.black,
+                                      Colors.transparent
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter),
                               ),
                             ),
-                          )
-                        ],
-                      ),
+                            buildSpecifications('assets/svg/engine.svg',
+                                "Engine", widget.car.engine, context),
+                            Container(
+                              height: 80,
+                              width: 1,
+                              decoration: const BoxDecoration(
+                                color: Colors.white70,
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.transparent,
+                                      Colors.black,
+                                      Colors.transparent
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter),
+                              ),
+                            ),
+                            buildSpecifications('assets/svg/seats.svg', "Seats",
+                                widget.car.seats, context),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.all(22.0),
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                                color: const Color(0xff212024),
+                                borderRadius: BorderRadius.circular(24)),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Rent Price',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .copyWith(
+                                              fontFamily: 'Prompt',
+                                              fontSize: 18,
+                                              color: Colors.white),
+                                    ),
+                                    Spacer(),
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: '₹ ${widget.car.rate}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall!
+                                                .copyWith(
+                                                    fontFamily: 'Prompt',
+                                                    fontSize: 18,
+                                                    color: Colors.white),
+                                          ),
+                                          TextSpan(
+                                            text: " /1 Day",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall!
+                                                .copyWith(
+                                                    fontFamily: 'Prompt',
+                                                    fontSize: 10,
+                                                    color: Colors.white60),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 20),
+                                Row(
+                                  children: [
+                                    Container(
+                                        padding: const EdgeInsets.all(15),
+                                        decoration: BoxDecoration(
+                                            color: Colors.black26,
+                                            borderRadius:
+                                                BorderRadius.circular(42)),
+                                        child:
+                                            const Icon(Icons.calendar_month)),
+                                    const Spacer(),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 12),
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xffCFFA49),
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      child: Text(
+                                        "Book now",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall!
+                                            .copyWith(
+                                                fontFamily: 'Prompt',
+                                                fontSize: 22,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
+}
+
+Widget buildSpecifications(
+    String svgPath, String text, String speed, BuildContext context) {
+  return Column(
+    children: [
+      SvgPicture.asset(
+        svgPath,
+        height: 20,
+        width: 20,
+        colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+      ),
+      const SizedBox(height: 5),
+      Text(
+        text,
+        style: Theme.of(context)
+            .textTheme
+            .bodySmall!
+            .copyWith(fontFamily: 'Prompt', fontSize: 16, color: Colors.black),
+      ),
+      const SizedBox(height: 8),
+      Text(
+        speed,
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            fontFamily: 'Orbitron', fontSize: 14, color: Colors.black),
+      ),
+    ],
+  );
 }

@@ -5,6 +5,7 @@ class ExoticCarModel {
   final String engine;
   final String maxspeed;
   final String seats;
+  final String rate;
 
   const ExoticCarModel({
     required this.imagePath,
@@ -13,6 +14,7 @@ class ExoticCarModel {
     required this.engine,
     required this.maxspeed,
     required this.seats,
+    required this.rate,
   });
 }
 
@@ -24,37 +26,24 @@ List<ExoticCarModel> exoticCars = const [
     engine: 'V12',
     maxspeed: '400',
     seats: '2',
+    rate: '10,000'
   ),
   ExoticCarModel(
-    imagePath: 'assets/exotic/revuelto.png',
-    brand: 'Lamborghini',
-    model: 'Revuelto',
-    engine: 'V12',
-    maxspeed: '400',
-    seats: '2',
-  ),
-  ExoticCarModel(
-    imagePath: 'assets/exotic/jesko.png',
+    imagePath: 'assets/exotic/bugatti.png',
     brand: 'Koenigsegg',
     model: 'Agera one',
     engine: 'V12',
     maxspeed: '400',
     seats: '2',
+    rate: '10,000'
   ),
   ExoticCarModel(
-    imagePath: 'assets/exotic/LA.png',
+    imagePath: 'assets/exotic/bugatti.png',
     brand: 'Koenigsegg',
     model: 'Agera one',
     engine: 'V12',
     maxspeed: '400',
     seats: '2',
-  ),
-  ExoticCarModel(
-    imagePath: 'assets/exotic/jesko.png',
-    brand: 'Koenigsegg',
-    model: 'Agera one',
-    engine: 'V12',
-    maxspeed: '400',
-    seats: '2',
+    rate: '10,000'
   ),
 ];
