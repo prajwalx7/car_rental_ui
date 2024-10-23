@@ -18,6 +18,16 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentPage = 0;
   final PageController _pageController = PageController();
 
+  // Fallback car to avoid passing null
+  ExoticCarModel defaultCar = const ExoticCarModel(
+      imagePath: 'assets/exotic/bugatti.png',
+      brand: 'Koenigsegg',
+      model: 'Agera one',
+      engine: 'V12',
+      maxspeed: '400',
+      seats: '2',
+      rate: '10,000');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Stack(
           children: [
             PageView(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               controller: _pageController,
               onPageChanged: (index) {
                 setState(() {
@@ -43,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 ExoticCars(
-                  car: exoticCars[currentPage],
+                  car: currentPage == 1 ? exoticCars[0] : defaultCar,
                 ),
                 const SchedulesScreen(),
                 const Profile(),

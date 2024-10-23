@@ -39,7 +39,7 @@ class _ExoticCarsState extends State<ExoticCars> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(38)),
-                margin: const EdgeInsets.symmetric(vertical: 50),
+                margin: const EdgeInsets.symmetric(vertical: 10),
                 child: Stack(
                   children: [
                     Column(
@@ -55,10 +55,33 @@ class _ExoticCarsState extends State<ExoticCars> {
                               height: 200,
                               width: double.infinity,
                             ).frosted(
-                                blur: 5,
-                                frostColor: Color.fromARGB(255, 213, 242, 124)),
+                                blur: 15,
+                                frostColor: Color.fromARGB(255, 228, 222, 222),
+                                frostOpacity: 0.2),
                           ),
                         ),
+                        Text(
+                          exoticCars[index].brand,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  fontFamily: 'Orbitron',
+                                  fontSize: 22,
+                                  color: Colors.black),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          exoticCars[index].model,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  fontFamily: 'Prompt',
+                                  fontSize: 18,
+                                  color: Colors.black87),
+                        ),
+                        SizedBox(height: 26),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -102,11 +125,12 @@ class _ExoticCarsState extends State<ExoticCars> {
                         ),
                         SizedBox(height: 10),
                         Padding(
-                          padding: const EdgeInsets.all(22.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Container(
-                            padding: const EdgeInsets.all(16),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 18, vertical: 16),
                             decoration: BoxDecoration(
-                                color: const Color(0xff212024),
+                                color: const Color(0xFF383838),
                                 borderRadius: BorderRadius.circular(24)),
                             child: Column(
                               children: [
@@ -160,12 +184,14 @@ class _ExoticCarsState extends State<ExoticCars> {
                                             color: Colors.black26,
                                             borderRadius:
                                                 BorderRadius.circular(42)),
-                                        child:
-                                            const Icon(Icons.calendar_month)),
+                                        child: const Icon(
+                                          Icons.calendar_month,
+                                          color: Color(0xffCFFA49),
+                                        )),
                                     const Spacer(),
                                     Container(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 12),
+                                          horizontal: 30, vertical: 12),
                                       decoration: BoxDecoration(
                                           color: const Color(0xffCFFA49),
                                           borderRadius:
@@ -207,17 +233,15 @@ Widget buildSpecifications(
     children: [
       SvgPicture.asset(
         svgPath,
-        height: 20,
-        width: 20,
+        height: 25,
+        width: 25,
         colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
       ),
-      const SizedBox(height: 5),
+      const SizedBox(height: 8),
       Text(
         text,
-        style: Theme.of(context)
-            .textTheme
-            .bodySmall!
-            .copyWith(fontFamily: 'Prompt', fontSize: 16, color: Colors.black),
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            fontFamily: 'Prompt', fontSize: 16, color: Colors.black87),
       ),
       const SizedBox(height: 8),
       Text(

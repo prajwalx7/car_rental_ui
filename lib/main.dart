@@ -1,5 +1,4 @@
 import 'package:car_rental_ui/screens/home_screen.dart';
-import 'package:car_rental_ui/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,9 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       darkTheme: ThemeData.dark(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: CustomTextTheme.customTextTheme,
-      ),
       home: const HomeScreen(),
     );
   }

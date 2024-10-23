@@ -20,30 +20,27 @@ class ExoticCarModel {
 
 List<ExoticCarModel> exoticCars = const [
   ExoticCarModel(
-    imagePath: 'assets/exotic/bugatti.png',
-    brand: 'Koenigsegg',
-    model: 'Agera one',
-    engine: 'V12',
-    maxspeed: '400',
-    seats: '2',
-    rate: '10,000'
-  ),
+      imagePath: 'assets/exotic/bugatti.png',
+      brand: 'Bugatti',
+      model: 'Chiron',
+      engine: 'V12',
+      maxspeed: '400',
+      seats: '2',
+      rate: '10,000'),
   ExoticCarModel(
-    imagePath: 'assets/exotic/bugatti.png',
-    brand: 'Koenigsegg',
-    model: 'Agera one',
-    engine: 'V12',
-    maxspeed: '400',
-    seats: '2',
-    rate: '10,000'
-  ),
+      imagePath: 'assets/exotic/bugatti.png',
+      brand: 'Koenigsegg',
+      model: 'Agera one',
+      engine: 'V12',
+      maxspeed: '400',
+      seats: '2',
+      rate: '10,000'),
   ExoticCarModel(
-    imagePath: 'assets/exotic/bugatti.png',
-    brand: 'Koenigsegg',
-    model: 'Agera one',
-    engine: 'V12',
-    maxspeed: '400',
-    seats: '2',
-    rate: '10,000'
-  ),
+      imagePath: 'assets/exotic/bugatti.png',
+      brand: 'Koenigsegg',
+      model: 'Agera one',
+      engine: 'V12',
+      maxspeed: '400',
+      seats: '2',
+      rate: '10,000'),
 ];
