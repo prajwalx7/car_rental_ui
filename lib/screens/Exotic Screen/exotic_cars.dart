@@ -1,6 +1,6 @@
 import 'package:car_rental_ui/screens/Exotic%20Screen/Exotic_Widgets/exotic_bottom.dart';
 import 'package:car_rental_ui/screens/Exotic%20Screen/Exotic_Widgets/exotic_middle.dart';
-import 'package:car_rental_ui/screens/Exotic%20Screen/Exotic_Widgets/model.dart';
+import 'package:car_rental_ui/screens/Exotic%20Screen/Exotic_Widgets/car_image.dart';
 import 'package:car_rental_ui/model/exotic_car_mode.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +53,7 @@ class _ExoticCarsState extends State<ExoticCars> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Model(car: exoticCars[index]),
+                    CarImage(car: exoticCars[index]),
                     ExoticMiddle(car: exoticCars[index]),
                     const SizedBox(height: 10),
                     ExoticBottom(car: exoticCars[index]),

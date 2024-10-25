@@ -1,9 +1,9 @@
 import 'package:car_rental_ui/model/exotic_car_mode.dart';
 import 'package:flutter/material.dart';
 
-class Model extends StatelessWidget {
+class CarImage extends StatelessWidget {
   final ExoticCarModel car;
-  const Model({super.key, required this.car});
+  const CarImage({super.key, required this.car});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,13 @@ class Model extends StatelessWidget {
         child: Container(
           color: Colors.grey.shade300,
           height: 200,
-          child: Image.asset(car.imagePath),
+          width: double.infinity,
+          child: Expanded(
+            child: Image.asset(
+              car.imagePath,
+              fit: BoxFit.contain,
+            ),
+          ),
         ),
       ),
     );

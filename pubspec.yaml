@@ -68,7 +68,6 @@ flutter:
   assets:
     - assets/images/
     - assets/cars/
-    - assets/exotic/
     - assets/svg/
     - assets/exoticCars/
 
