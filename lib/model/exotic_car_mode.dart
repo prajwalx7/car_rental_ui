@@ -38,6 +38,15 @@ List<ExoticCarModel> exoticCars = const [
     rate: '9,000',
   ),
   ExoticCarModel(
+    imagePath: 'assets/exoticCars/chiron.png',
+    brand: 'Bugatti',
+    model: 'Chiron',
+    engine: '8.0L W16',
+    maxspeed: '420',
+    seats: '2',
+    rate: '12,000',
+  ),
+  ExoticCarModel(
     imagePath: 'assets/exoticCars/jesko.png',
     brand: 'Koenigsegg',
     model: 'Jesko',

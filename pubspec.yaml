@@ -42,6 +42,7 @@ dependencies:
   fading_edge_scrollview: ^4.1.1
   flutter_svg: ^2.0.10+1
   blur: ^4.0.0
+  flutter_flip_card: ^0.0.6
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,7 @@ flutter:
     - assets/cars/
     - assets/svg/
     - assets/exoticCars/
+    - assets/3Dmodels/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

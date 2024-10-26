@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class ExoticBottom extends StatefulWidget {
   final ExoticCarModel car;
-  const ExoticBottom({super.key, required this.car});
+  final Function(DateTime) onDateConfirmed;
+  const ExoticBottom(
+      {super.key, required this.car, required this.onDateConfirmed});
 
   @override
   State<ExoticBottom> createState() => _ExoticBottomState();
@@ -12,6 +14,7 @@ class ExoticBottom extends StatefulWidget {
 
 class _ExoticBottomState extends State<ExoticBottom> {
   bool isStarred = false;
+  DateTime? selectedDate;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -116,13 +119,22 @@ class _ExoticBottomState extends State<ExoticBottom> {
                                   ),
                                 ),
                               ),
-                              const Expanded(
-                                child: DatePicker(),
+                              Expanded(
+                                child: DatePicker(
+                                  onDateSelected: (DateTime selectedDateTime) {
+                                    selectedDate =
+                                        selectedDateTime; 
+                                    widget.onDateConfirmed(
+                                        selectedDateTime); 
+                                  },
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(16),
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    widget.onDateConfirmed(
+                                        selectedDate ?? DateTime.now());
                                     Navigator.pop(context);
                                     setState(() {});
                                   },

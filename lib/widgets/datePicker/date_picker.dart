@@ -5,7 +5,8 @@ import 'package:car_rental_ui/widgets/datePicker/minutes.dart';
 import 'package:flutter/material.dart';
 
 class DatePicker extends StatefulWidget {
-  const DatePicker({super.key});
+  final Function(DateTime) onDateSelected;
+  const DatePicker({super.key, required this.onDateSelected});
 
   @override
   State<DatePicker> createState() => _DatePickerState();
