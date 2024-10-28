@@ -15,7 +15,9 @@ class CarImage extends StatelessWidget {
           color: Colors.grey.shade300,
           height: 200,
           width: double.infinity,
-          child: Expanded(
+          child: SizedBox(
+            height: 200,
+            width: 200,
             child: Image.asset(
               car.imagePath,
               fit: BoxFit.contain,

@@ -4,13 +4,16 @@ import 'package:car_rental_ui/screens/Exotic%20Screen/Exotic_Widgets/exotic_midd
 import 'package:car_rental_ui/screens/Exotic%20Screen/Exotic_Widgets/car_image.dart';
 import 'package:car_rental_ui/model/exotic_car_mode.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ExoticCars extends StatefulWidget {
   final ExoticCarModel car;
-
+  final DateTime? selectedDateTime;
+  
   const ExoticCars({
     super.key,
     required this.car,
+    this.selectedDateTime,
   });
 
   @override
@@ -26,10 +29,18 @@ class _ExoticCarsState extends State<ExoticCars> {
   final List<FlipCardController> flipControllers = [];
   final List<DateTime?> selectedDates = [];
 
+  String _formatDateTime(DateTime? dateTime) {
+    if (dateTime == null) return 'No date selected';
+    
+    final date = DateFormat('EEEE, MMMM d, y').format(dateTime);
+    final time = DateFormat('h:mm a').format(dateTime);
+    
+    return '$date\n$time';
+  }
+
   @override
   void initState() {
     super.initState();
-
     for (var i = 0; i < exoticCars.length; i++) {
       flipControllers.add(FlipCardController());
       selectedDates.add(null);
@@ -44,7 +55,10 @@ class _ExoticCarsState extends State<ExoticCars> {
         title: const Text(
           "Exotic Cars",
           style: TextStyle(
-              fontSize: 26, fontWeight: FontWeight.w500, fontFamily: 'Prompt'),
+            fontSize: 26, 
+            fontWeight: FontWeight.w500, 
+            fontFamily: 'Prompt'
+          ),
         ),
         centerTitle: true,
         backgroundColor: const Color(0xff06090D),
@@ -61,7 +75,7 @@ class _ExoticCarsState extends State<ExoticCars> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: FlipCard(
                 rotateSide: RotateSide.left,
-                onTapFlipping: false,
+                onTapFlipping: false, 
                 axis: FlipAxis.vertical,
                 controller: flipControllers[index],
                 frontWidget: Container(
@@ -82,6 +96,7 @@ class _ExoticCarsState extends State<ExoticCars> {
                           setState(() {
                             selectedDates[index] = date;
                           });
+                        
                           flipControllers[index].flipcard();
                         },
                       ),
@@ -97,68 +112,45 @@ class _ExoticCarsState extends State<ExoticCars> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Booking Confirmed',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Prompt',
-                          color: Colors.black,
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 16,
                         ),
-                      ),
-                      CarImage(car: exoticCars[index]),
-                      const Text(
-                        'Booking Details',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Prompt',
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        'Your ${car.brand}  ${car.model} will be delivered to your address',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'Prompt',
-                          color: Colors.black,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        selectedDates[index] != null
-                            ? '${selectedDates[index]!.day}/${selectedDates[index]!.month}/${selectedDates[index]!.year}'
-                            : 'No date selected',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Prompt',
+                        child: Text(
+                          _formatDateTime(selectedDates[index]),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
+                            color: Colors.black,
+                            height: 1.5,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 30),
                       ElevatedButton(
                         onPressed: () {
-                          flipControllers[index].flipcard();
+                          flipControllers[index].flipcard(); 
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xffCFFA49),
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
-                            vertical: 12,
+                            horizontal: 32,
+                            vertical: 16,
                           ),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                         child: const Text(
                           'Back to Car',
                           style: TextStyle(
-                            color: Colors.black,
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             fontFamily: 'Prompt',
+                            color: Color(0xff06090D),
                           ),
                         ),
                       ),
@@ -173,3 +165,4 @@ class _ExoticCarsState extends State<ExoticCars> {
     );
   }
 }
+

@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 class ExoticBottom extends StatefulWidget {
   final ExoticCarModel car;
   final Function(DateTime) onDateConfirmed;
-  const ExoticBottom(
-      {super.key, required this.car, required this.onDateConfirmed});
+
+  const ExoticBottom({
+    super.key,
+    required this.car,
+    required this.onDateConfirmed,
+  });
 
   @override
   State<ExoticBottom> createState() => _ExoticBottomState();
@@ -15,6 +19,7 @@ class ExoticBottom extends StatefulWidget {
 class _ExoticBottomState extends State<ExoticBottom> {
   bool isStarred = false;
   DateTime? selectedDate;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -82,8 +87,6 @@ class _ExoticBottomState extends State<ExoticBottom> {
                 const Spacer(),
                 InkWell(
                   onTap: () async {
-                    setState(() {});
-
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
@@ -122,10 +125,7 @@ class _ExoticBottomState extends State<ExoticBottom> {
                               Expanded(
                                 child: DatePicker(
                                   onDateSelected: (DateTime selectedDateTime) {
-                                    selectedDate =
-                                        selectedDateTime; 
-                                    widget.onDateConfirmed(
-                                        selectedDateTime); 
+                                    selectedDate = selectedDateTime;
                                   },
                                 ),
                               ),
@@ -133,10 +133,12 @@ class _ExoticBottomState extends State<ExoticBottom> {
                                 padding: const EdgeInsets.all(16),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    widget.onDateConfirmed(
-                                        selectedDate ?? DateTime.now());
-                                    Navigator.pop(context);
-                                    setState(() {});
+                                    if (selectedDate != null) {
+                                      widget.onDateConfirmed(selectedDate!);
+
+                                      setState(() {});
+                                      Navigator.pop(context);
+                                    }
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xffCFFA49),
