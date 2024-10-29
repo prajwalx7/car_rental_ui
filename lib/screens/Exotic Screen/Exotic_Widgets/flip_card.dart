@@ -6,11 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/controllers/flip_card_controllers.dart';
 import 'package:flutter_flip_card/flipcard/flip_card.dart';
 import 'package:flutter_flip_card/modal/flip_side.dart';
+import 'package:intl/intl.dart';
 
 class CardFlip extends StatefulWidget {
   final ExoticCarModel car;
   final int index;
-  const CardFlip({super.key, required this.car, required this.index});
+  final DateTime? selectedDateTime;
+  final Function(bool) onFlip;
+  const CardFlip({
+    super.key,
+    required this.car,
+    required this.index,
+    this.selectedDateTime,
+    required this.onFlip,
+  });
 
   @override
   State<CardFlip> createState() => _CardFlipState();
@@ -19,21 +28,39 @@ class CardFlip extends StatefulWidget {
 class _CardFlipState extends State<CardFlip> {
   final List<FlipCardController> flipControllers = [];
   final List<DateTime?> selectedDates = [];
-  List<DateTime?> selectedDate = List<DateTime?>.filled(10, null);
 
-  void _onDateConfirmed(DateTime date) {
-    setState(() {
-      selectedDates[widget.index] = date;
-    });
+  String _formatDate(DateTime? dateTime) {
+    if (dateTime == null) return 'No date selected';
+
+    final date = DateFormat('EE MMM d').format(dateTime);
+
+    return date;
+  }
+
+  String _formatTime(DateTime? dateTime) {
+    if (dateTime == null) return 'No time selected';
+
+    final time = DateFormat('h:mm a').format(dateTime);
+
+    return time;
+  }
+
+  String _calculateDropOffTime(DateTime? pickupDateTime) {
+    if (pickupDateTime == null) return 'No time selected';
+
+    final dropOffDateTime = pickupDateTime.add(const Duration(hours: 24));
+    final time = DateFormat('h:mm a').format(dropOffDateTime);
+    final date = DateFormat('EE MMM d').format(dropOffDateTime);
+
+    return '$time ($date)';
   }
 
   @override
   void initState() {
     super.initState();
-
     for (var i = 0; i < exoticCars.length; i++) {
       flipControllers.add(FlipCardController());
-      selectedDates.add(null); // Initialize dates as null for each card
+      selectedDates.add(null);
     }
   }
 
@@ -45,7 +72,7 @@ class _CardFlipState extends State<CardFlip> {
       axis: FlipAxis.vertical,
       controller: flipControllers[widget.index],
       frontWidget: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 1),
         decoration: BoxDecoration(
           color: Colors.grey.shade50,
           borderRadius: BorderRadius.circular(24),
@@ -54,15 +81,16 @@ class _CardFlipState extends State<CardFlip> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CarImage(car: exoticCars[widget.index]),
-            ExoticMiddle(car: exoticCars[widget.index]),
             const SizedBox(height: 10),
+            ExoticMiddle(car: exoticCars[widget.index]),
+            const SizedBox(height: 15),
             ExoticBottom(
               car: exoticCars[widget.index],
               onDateConfirmed: (date) {
                 setState(() {
-                  // Make sure the selected date is updated correctly
                   selectedDates[widget.index] = date;
                 });
+                widget.onFlip(false);
                 flipControllers[widget.index].flipcard();
               },
             ),
@@ -70,7 +98,6 @@ class _CardFlipState extends State<CardFlip> {
         ),
       ),
       backWidget: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
           color: Colors.grey.shade50,
           borderRadius: BorderRadius.circular(24),
@@ -78,16 +105,8 @@ class _CardFlipState extends State<CardFlip> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Booking Confirmed',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Prompt',
-                color: Colors.black,
-              ),
-            ),
             CarImage(car: exoticCars[widget.index]),
+            SizedBox(height: 10),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
@@ -96,43 +115,54 @@ class _CardFlipState extends State<CardFlip> {
                 border: Border.all(color: Colors.black.withOpacity(0.1)),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(14),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       'Rental Details',
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Prompt',
                         color: Colors.black,
                       ),
                     ),
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 20),
                     _buildDetailRow(
                       label: 'Vehicle',
                       value: widget.car.brand,
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 16),
                     _buildDetailRow(
                       label: 'Model',
                       value: widget.car.model,
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 16),
                     _buildDetailRow(
                       label: 'Pickup Date',
-                      value: selectedDates[widget.index] != null
-                          ? '${selectedDates[widget.index]!.day}/${selectedDates[widget.index]!.month}/${selectedDates[widget.index]!.year}'
-                          : 'No date selected',
+                      value: _formatDate(selectedDates[widget.index]),
                       isDate: true,
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 16),
+                    _buildDetailRow(
+                      label: 'Pickup Time',
+                      value: _formatTime(selectedDates[widget.index]),
+                      isDate: true,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildDetailRow(
+                      label: 'Drop-off Time',
+                      value: _calculateDropOffTime(selectedDates[widget.index]),
+                      isDate: true,
+                    ),
+                    const SizedBox(height: 16),
                     _buildDetailRow(
                       label: 'Duration',
                       value: '24-Hour Rental',
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 16),
                     _buildDetailRow(
                       label: 'Status',
                       value: 'Confirmed',
@@ -142,31 +172,37 @@ class _CardFlipState extends State<CardFlip> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
-            ElevatedButton(
+            const SizedBox(height: 8),
+            ElevatedButton.icon(
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+                size: 16,
+              ),
               onPressed: () {
+                widget.onFlip(true);
                 flipControllers[widget.index].flipcard();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xffCFFA49),
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
+                  horizontal: 80,
                   vertical: 12,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: const Text(
+              label: const Text(
                 'Back to Car',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                   fontFamily: 'Prompt',
                 ),
               ),
             ),
+            SizedBox(height: 10),
           ],
         ),
       ),
@@ -185,8 +221,8 @@ Widget _buildDetailRow({
     children: [
       Text(
         label,
-        style: TextStyle(
-          fontSize: 16,
+        style: const TextStyle(
+          fontSize: 15,
           fontFamily: 'Prompt',
           color: Colors.black,
           fontWeight: FontWeight.normal,
@@ -195,7 +231,7 @@ Widget _buildDetailRow({
       Text(
         value,
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 15,
           fontFamily: 'Prompt',
           color: isConfirmed ? Colors.green[400] : Colors.black,
           fontWeight:
