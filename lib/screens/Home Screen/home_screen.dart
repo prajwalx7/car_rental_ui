@@ -19,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
   bool _showBottomBar = true;
 
-  // Fallback car to avoid passing null
   ExoticCarModel defaultCar = const ExoticCarModel(
       imagePath: 'assets/exotic/bugatti.png',
       brand: 'Koenigsegg',
@@ -34,47 +33,49 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xff06090D),
       body: SafeArea(
-        child: Stack(
+        child: IndexedStack(
           children: [
-            PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _pageController,
-              onPageChanged: (index) {
-                setState(() {
-                  currentPage = index;
-                });
-              },
+            Stack(
               children: [
-                HomeContent(
-                  selectedBrand: selectedBrand,
-                  onBrandSelected: (String brand) {
+                PageView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: _pageController,
+                  onPageChanged: (index) {
                     setState(() {
-                      selectedBrand = brand;
+                      currentPage = index;
                     });
                   },
+                  children: [
+                    HomeContent(
+                      selectedBrand: selectedBrand,
+                      onBrandSelected: (String brand) {
+                        setState(() {
+                          selectedBrand = brand;
+                        });
+                      },
+                    ),
+                    ExoticCars(
+                      car: currentPage == 1 ? exoticCars[0] : defaultCar,
+                    ),
+                    const SchedulesScreen(),
+                    const Profile(),
+                  ],
                 ),
-                ExoticCars(
-                  car: currentPage == 1 ? exoticCars[0] : defaultCar,
-                ),
-                const SchedulesScreen(),
-                const Profile(),
+                if (_showBottomBar)
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: CustomBottomNavBar(
+                      currentIndex: currentPage,
+                      onTap: (int index) {
+                        _pageController.animateToPage(index,
+                            duration: const Duration(microseconds: 800),
+                            curve: Curves.easeIn);
+                      },
+                    ),
+                  ),
               ],
-            ),
-            if (_showBottomBar)
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: CustomBottomNavBar(
-                currentIndex: currentPage,
-                onTap: (int index) {
-                  _pageController.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  );
-                },
-              ),
             ),
           ],
         ),
