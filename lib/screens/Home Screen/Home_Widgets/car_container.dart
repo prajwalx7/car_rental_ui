@@ -1,6 +1,7 @@
 import 'package:car_rental_ui/model/car_model.dart';
 import 'package:car_rental_ui/screens/Detail%20Screen/home_detail_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CarContainer extends StatelessWidget {
@@ -21,7 +22,6 @@ class CarContainer extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          // color: const Color(0xff212024),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Stack(
@@ -127,7 +127,7 @@ class CarContainer extends StatelessWidget {
                 car.modelUrl,
                 height: 140,
                 width: 180,
-              ),
+              ).animate().moveX(duration: 800.ms, begin: 20, end: -3),
             ),
             Positioned(
               bottom: 0,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class HorizontalList extends StatefulWidget {
   final Function(String) onBrandSelected;
@@ -63,6 +64,6 @@ class _HorizontalListState extends State<HorizontalList> {
           widget.onBrandSelected(brand);
         });
       },
-    );
+    ).animate().shimmer(duration: 1000.ms);
   }
 }

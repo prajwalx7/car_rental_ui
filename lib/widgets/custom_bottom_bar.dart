@@ -56,7 +56,7 @@ class CustomBottomNavBar extends StatelessWidget {
           icon,
           size: 24,
           color: isSelected ? Colors.black : Colors.white,
-        ).animate().scale(duration: 300.ms),
+        ).animate().scale(duration: 600.ms),
       ),
     );
   }
