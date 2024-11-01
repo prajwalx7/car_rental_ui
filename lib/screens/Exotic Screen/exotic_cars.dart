@@ -23,10 +23,25 @@ class _ExoticCarsState extends State<ExoticCars> {
   );
 
   bool isFlipped = false;
+  bool isAnimating = false;
+  String currentTitle = "Exotic Cars";
 
   void updateFlipState(bool flipped) {
     setState(() {
-      isFlipped = !flipped;
+      isAnimating = true;
+      // Delay the title change to match the card flip animation
+      Future.delayed(const Duration(milliseconds: 200), () {
+        setState(() {
+          isFlipped = !flipped;
+          currentTitle = isFlipped ? "Booking Confirm" : "Exotic Cars";
+        });
+      });
+      // Reset the animation flag after the complete animation cycle
+      Future.delayed(const Duration(milliseconds: 500), () {
+        setState(() {
+          isAnimating = false;
+        });
+      });
     });
   }
 
@@ -35,10 +50,23 @@ class _ExoticCarsState extends State<ExoticCars> {
     return Scaffold(
       backgroundColor: const Color(0xff06090D),
       appBar: AppBar(
-        title: Text(
-          isFlipped ? "Booking Confirm" : "Exotic Cars",
-          style: const TextStyle(
-              fontSize: 26, fontWeight: FontWeight.w500, fontFamily: 'Prompt'),
+        title: AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          child: Text(
+            currentTitle,
+            key: ValueKey<String>(currentTitle),
+            style: const TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Prompt',
+            ),
+          ),
         ),
         centerTitle: true,
         backgroundColor: const Color(0xff06090D),

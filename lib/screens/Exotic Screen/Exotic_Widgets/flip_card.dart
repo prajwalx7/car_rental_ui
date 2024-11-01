@@ -67,6 +67,7 @@ class _CardFlipState extends State<CardFlip> {
   @override
   Widget build(BuildContext context) {
     return FlipCard(
+      animationDuration: Duration(milliseconds: 800),
       rotateSide: RotateSide.left,
       onTapFlipping: false,
       axis: FlipAxis.vertical,

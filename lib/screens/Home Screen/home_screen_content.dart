@@ -3,7 +3,7 @@ import 'package:car_rental_ui/screens/Home%20Screen/Home_Widgets/header_widget.d
 import 'package:car_rental_ui/screens/Home%20Screen/Home_Widgets/horizontal_list.dart';
 import 'package:flutter/material.dart';
 
-class HomeContent extends StatelessWidget {
+class HomeContent extends StatefulWidget {
   final String selectedBrand;
   final ValueChanged<String> onBrandSelected;
 
@@ -14,17 +14,26 @@ class HomeContent extends StatelessWidget {
   });
 
   @override
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const HeaderWidget(),
         const SizedBox(height: 10),
         HorizontalList(
-          onBrandSelected: onBrandSelected,
+          onBrandSelected: widget.onBrandSelected,
         ),
         const SizedBox(height: 8),
-        CarContainerList(selectedBrand: selectedBrand),
+        CarContainerList(selectedBrand: widget.selectedBrand),
       ],
     );
   }
