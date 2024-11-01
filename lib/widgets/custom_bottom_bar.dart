@@ -30,7 +30,12 @@ class CustomBottomNavBar extends StatelessWidget {
           _buildNavItem(context, Iconsax.user, 3),
         ],
       ),
-    );
+    ).animate().slideY(
+        duration: 800.ms,
+        // delay: 100.ms,
+        begin: 3,
+        end: 0,
+        curve: Curves.easeIn);
   }
 
   Widget _buildNavItem(
@@ -56,7 +61,7 @@ class CustomBottomNavBar extends StatelessWidget {
           icon,
           size: 24,
           color: isSelected ? Colors.black : Colors.white,
-        ).animate().scale(duration: 600.ms),
+        ).animate().scale(duration: 600.ms, delay: 600.ms),
       ),
     );
   }
