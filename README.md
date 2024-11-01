@@ -2,15 +2,12 @@
 
 A new Flutter project.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# ScreenShots
+<div style="display: flex; flex-wrap: wrap;">
+    <img src="assets/screenshots/1.png" alt="Image 1" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/screenshots/2.png" alt="Image 2" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/screenshots/3.png" alt="Image 3" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/screenshots/4.png" alt="Image 4" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/screenshots/5.png" alt="Image 5" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/screenshots/6.png" alt="Image 6" style="width: 30%; height: auto; margin: 5px;">
+</div>
